@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ServiceParser.Entities.Snippet>
+
+<div class="container">
+    @if (Model != null)
+    {
+        <table class="table">
+            <tr><th>Tittle</th><th>Url</th></tr>
+            @foreach (var snippet in Model)
+            {
+                <tr><td>@snippet.Title</td><td><a href="@snippet.Url">@snippet.Url</a></td></tr>
+            }
+        </table>
+    }
+</div>
+
