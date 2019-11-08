@@ -1,10 +1,6 @@
 ﻿using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using SearchApp.Models;
-using ServiceParser.SearchEngine;
-using ServiceParser.SearchServices.Yandex;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace SearchApp.Controllers
 {
@@ -20,15 +16,15 @@ namespace SearchApp.Controllers
             return View();
         }
 
-        public IActionResult GetDataFromParser([FromForm]string searchQuery)
+        public async Task<IActionResult> GetDataFromParser([FromForm]string searchQuery, int count = 10)
         {
-            var snippets = _snippetManager.GetTenSnippetsFromParser(searchQuery);
+            var snippets = await _snippetManager.GetSnippetsFromParserAsync(searchQuery, count);
             return View("Index", snippets);
         }
 
-        public IActionResult GetDataFromDb()
+        public async Task<IActionResult> GetDataFromDb(int count = 10)
         {
-            var snippets = _snippetManager.GetTenSnippetsFromDb();
+            var snippets = await _snippetManager.GetSnippetsFromDbAsync(count);
             return View("Index", snippets);
         }
     }

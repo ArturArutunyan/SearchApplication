@@ -27,10 +27,9 @@ namespace BLL.Repositories
 
         public async Task<IEnumerable<TEntity>> GetSnippets(int count)
         {
-            //var entities = _context.Set<TEntity>()
-            //    .FromSqlRaw($"SELECT * FROM [search_app][dbo.Snippets]");
-            var entities = await _context.Set<TEntity>().Take(10).ToListAsync();
-            return entities;
+            var entities = await _context.Set<TEntity>().ToListAsync();
+
+            return entities.Skip(entities.Count - count).Take(count);
         }
       
     }

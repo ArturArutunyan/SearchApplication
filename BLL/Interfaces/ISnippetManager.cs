@@ -10,11 +10,11 @@ namespace BLL.Interfaces
         /// Метод возрашающий спискок сниппетов полученных в результате парсинга запроса 
         /// </summary>
         /// <param name="searchQuery">Запрос для поиска</param>
-        IEnumerable<Snippet> GetTenSnippetsFromParser(string searchQuery);
+        Task<IEnumerable<Snippet>> GetSnippetsFromParserAsync(string searchQuery, int count);
 
         /// <summary>
         /// Метод возрашающий спискок состоящий из первых 10 сниппетов находящихся в БД
         /// </summary>
-        Task<IEnumerable<Snippet>> GetTenSnippetsFromDb();
+        Task<IEnumerable<Snippet>> GetSnippetsFromDbAsync(int count);
     }
 }

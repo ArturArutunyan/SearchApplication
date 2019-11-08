@@ -2,7 +2,6 @@
 using ServiceParser.Entities;
 using ServiceParser.SearchEngine;
 using ServiceParser.SearchServices.Yandex;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,24 +15,24 @@ namespace BLL.Managers
         {
             _snippetRepository = snippetRepository;
         }
-        public IEnumerable<Snippet> GetTenSnippetsFromParser(string searchQuery)
+        public async Task<IEnumerable<Snippet>> GetSnippetsFromParserAsync(string searchQuery, int count)
         {
             var searchEngine = new Engine();
 
             var yandex = new Yandex();
 
             searchEngine.AddSearchService(yandex);
-            var snippets = searchEngine.Start(searchQuery);
+            var snippets = searchEngine.Start(searchQuery, count);
 
             if (snippets != null)
-                _snippetRepository.AddRangeAsync(snippets);
+                await _snippetRepository.AddRangeAsync(snippets);
                 
             return snippets;
         }
 
-        public async Task<IEnumerable<Snippet>> GetTenSnippetsFromDb()
+        public async Task<IEnumerable<Snippet>> GetSnippetsFromDbAsync(int count)
         {
-            return await _snippetRepository.GetSnippets(10);
+            return await _snippetRepository.GetSnippets(count);
         }
     }
 }

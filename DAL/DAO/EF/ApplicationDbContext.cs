@@ -1,5 +1,5 @@
 ﻿/// Hints
-/// add-migration name -outputdir \DAL\DAO\EF\Migrations
+/// Add-Migration 001 -OutputDir Migrations
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -25,7 +25,6 @@ namespace DAL.DAO.EF
         /// </summary>
         public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
         {
-
             public ApplicationDbContext CreateDbContext(string[] args)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -46,13 +45,13 @@ namespace DAL.DAO.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.IdentityBuild();
+            modelBuilder.SnippetBuild();
         }
     }
 
     internal static class ModelCreatorExtensions
     {
-        internal static void IdentityBuild(this ModelBuilder builder)
+        internal static void SnippetBuild(this ModelBuilder builder)
         {
             builder.Entity<Snippet>().Property(s => s.Title).IsRequired();
             builder.Entity<Snippet>().Property(s => s.Url).IsRequired();
