@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using AngleSharp.Dom;
 using ServiceParser.Entities;
 
 namespace ServiceParser.SearchServices.Google
@@ -13,7 +10,7 @@ namespace ServiceParser.SearchServices.Google
         {
             BaseUrl = @"https://www.google.com/search?q=";
         }
-        public override async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count = 10, CancellationToken? cancellationToken = null)
+        public override async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken)
         {
             return await GetSnippetsAsync(
                     searchQuery: searchQuery,
@@ -22,11 +19,6 @@ namespace ServiceParser.SearchServices.Google
                     mainContainerClass: GoogleSnippetsCSS.MainContainerClass,
                     cancellationToken: cancellationToken
                 );
-        }
-
-        protected override Task<IEnumerable<IElement>> GetSnippetsContainersAsync(string searchQuery, int count, string mainContainerClass)
-        {
-            throw new NotImplementedException();
         }
     }
 }

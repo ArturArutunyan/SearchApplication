@@ -12,7 +12,7 @@ namespace ServiceParser.SearchServices.Yandex
             BaseUrl = @"https://yandex.ru/search/?text=";
         }
 
-        public override async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken? cancellationToken = null)
+        public override async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken)
         {
             return await GetSnippetsAsync(
                     searchQuery: searchQuery,

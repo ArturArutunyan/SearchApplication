@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ServiceParser.Entities;
 using ServiceParser.Interfaces;
+using ServiceParser.Interfaces.SearchServices;
 using ServiceParser.SearchService;
 
 namespace ServiceParser.SearchEngine

@@ -1,4 +1,5 @@
 ﻿using ServiceParser.Entities;
+using ServiceParser.Interfaces.SearchServices;
 using ServiceParser.SearchService;
 using System.Collections.Generic;
 

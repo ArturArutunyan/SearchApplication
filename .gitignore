@@ -356,5 +356,6 @@ MigrationBackup/
 # Custom
 /DAL/DAO/EF/Migrations
 /SearchApp/.local-chromium
+/ServiceParser/ServiceParserSnippets/ServiceParser/ServiceParser/Program.cs
 
 # End of https://www.gitignore.io/api/visualstudio

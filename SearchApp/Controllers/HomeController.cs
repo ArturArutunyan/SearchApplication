@@ -22,7 +22,7 @@ namespace SearchApp.Controllers
             return View("Index", snippets);
         }
 
-        public async Task<IActionResult> GetDataFromDb(int count = 10)
+        public async Task<IActionResult> GetDataFromDb(int count = 20)
         {
             var snippets = await _snippetManager.GetSnippetsFromDbAsync(count);
             return View("Index", snippets);
