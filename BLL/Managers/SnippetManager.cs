@@ -1,5 +1,4 @@
 ﻿using BLL.Interfaces;
-using ServiceParser.Entities;
 using ServiceParser.Interfaces.SearchServices;
 using ServiceParser.SearchEngine;
 using ServiceParser.SearchServices.Yandex;
