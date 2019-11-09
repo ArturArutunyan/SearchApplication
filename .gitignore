@@ -354,6 +354,7 @@ healthchecksdb
 MigrationBackup/
 
 # Custom
-/DAL/DAO/EF/Migrations/
+/DAL/DAO/EF/Migrations
+/SearchApp/.local-chromium
 
 # End of https://www.gitignore.io/api/visualstudio

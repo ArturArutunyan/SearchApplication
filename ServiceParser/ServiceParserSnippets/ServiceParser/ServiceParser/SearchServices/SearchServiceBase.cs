@@ -1,11 +1,11 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
+using PuppeteerSharp;
 using ServiceParser.Entities;
 using ServiceParser.Interfaces;
 using ServiceParser.SearchService;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +14,6 @@ namespace ServiceParser.SearchServices
     public abstract class SearchServiceBase : ISearchService
     {
         public string BaseUrl { get; protected set; }
-        private readonly static HttpClient Client = new HttpClient();
 
         public abstract Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count = 10, CancellationToken? cancellationToken = null);
 
@@ -57,8 +56,22 @@ namespace ServiceParser.SearchServices
 
         protected virtual async Task<IEnumerable<IElement>> GetSnippetsContainersAsync(string searchQuery, int count, string mainContainerClass)
         {
-            var source = await Client.GetAsync(BaseUrl + searchQuery); // Запрашиваем страницу
-            var html = await source.Content.ReadAsStringAsync();  // приводим к string, дабы построить DOM модель
+            // Для запроса страницы используется библиотека Puppeteer sharp
+            // она позволяет обходить защиту поисковых систем от парсинга
+            // подробнее тут https://www.puppeteersharp.com/api/index.html
+
+            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision); // грузит браузер через который будут осуществляться запросы 
+
+            // запуск браузера
+            Browser browser = await Puppeteer.LaunchAsync(new LaunchOptions
+            {
+                Headless = true 
+            });
+
+            Page page = await browser.NewPageAsync();
+            await page.GoToAsync(BaseUrl + searchQuery); // собственно получение обьекта страницы
+
+            var html = await page.GetContentAsync();
 
             var parser = new HtmlParser();
             var document = parser.ParseDocument(html); // строим DOM модель
