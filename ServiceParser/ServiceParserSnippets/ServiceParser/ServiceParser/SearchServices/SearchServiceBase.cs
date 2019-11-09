@@ -1,9 +1,8 @@
-﻿using AngleSharp.Dom;
+using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using PuppeteerSharp;
 using ServiceParser.Entities;
 using ServiceParser.Interfaces;
-using ServiceParser.Interfaces.SearchServices;
 using ServiceParser.SearchService;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +28,6 @@ namespace ServiceParser.SearchServices
             // Для запроса страницы используется библиотека Puppeteer sharp
             // она позволяет обходить защиту поисковых систем от парсинга
             // подробнее тут https://www.puppeteersharp.com/api/index.html
-
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision); // грузит браузер через который будут осуществляться запросы 
 
             // запуск браузера
@@ -38,19 +36,19 @@ namespace ServiceParser.SearchServices
                 Headless = true
             });
 
-            List<IElement> snippetsContainers = new List<IElement>();
-            Page page = await browser.NewPageAsync();
+            Page page = await browser.NewPageAsync();          
+
             var parser = new HtmlParser();
 
             int leftToTake = count;
             int pageId = 0;
 
-            while (snippetsContainers.Count != count)
+            while (snippets.Count != count)
             {
                 if (cancellationToken.IsCancellationRequested)
                     return snippets.ToArray();
 
-                leftToTake -= snippetsContainers.Count;
+                leftToTake -= snippets.Count;
 
                 await page.GoToAsync(BaseUrl + searchQuery + $"&p={pageId++}"); // собственно получение обьекта страницы
 
@@ -73,8 +71,10 @@ namespace ServiceParser.SearchServices
 
             foreach(var container in containers)
             {
-                if (container != null)
-                    snippets.Add(helper.GetSnippet(container));
+                var snippet = helper.GetSnippet(container);
+                
+                if (snippet != null)
+                    snippets.Add(snippet);
             }
             return snippets;
         }
