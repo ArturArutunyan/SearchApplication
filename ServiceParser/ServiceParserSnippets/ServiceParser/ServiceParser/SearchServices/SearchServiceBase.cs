@@ -1,4 +1,4 @@
-﻿using AngleSharp.Dom;
+using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using PuppeteerSharp;
 using ServiceParser.Entities;
