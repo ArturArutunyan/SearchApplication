@@ -1,4 +1,5 @@
 ﻿using ServiceParser.Entities;
+using ServiceParser.Interfaces.SearchServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,9 +8,9 @@ namespace ServiceParser.SearchServices.Yandex
 {
     public class Yandex : SearchServiceBase
     {
-        public Yandex()
+        public Yandex(ISearchServiceSettings settings)
         {
-            BaseUrl = @"https://yandex.ru/search/?text=";
+            Settings = settings;
         }
 
         public override async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken)
@@ -18,7 +19,7 @@ namespace ServiceParser.SearchServices.Yandex
                     searchQuery: searchQuery,
                     count: count,
                     helper: new YandexServiceHelper(),
-                    mainContainerClass: YandexSnippetsCSS.MainContainerClass,
+                    mainContainerClass: Settings.MainContainerClass,
                     cancellationToken: cancellationToken
                 );
         }

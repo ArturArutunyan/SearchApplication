@@ -3,6 +3,7 @@ using AngleSharp.Html.Parser;
 using PuppeteerSharp;
 using ServiceParser.Entities;
 using ServiceParser.Interfaces;
+using ServiceParser.Interfaces.SearchServices;
 using ServiceParser.SearchService;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ using System.Threading.Tasks;
 namespace ServiceParser.SearchServices
 {
     public abstract class SearchServiceBase : ISearchService
-    {
-        public string BaseUrl { get; protected set; }
+    { 
+        public ISearchServiceSettings Settings { get; set; }
 
         public abstract Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken);
 
@@ -50,7 +51,7 @@ namespace ServiceParser.SearchServices
 
                 leftToTake -= snippets.Count;
 
-                await page.GoToAsync(BaseUrl + searchQuery + $"&p={pageId++}"); // собственно получение обьекта страницы
+                await page.GoToAsync($"{Settings.BaseUrl}{searchQuery}{Settings.Page}{pageId++}"); // собственно получение обьекта страницы
 
                 var html = await page.GetContentAsync();
                 
@@ -78,6 +79,5 @@ namespace ServiceParser.SearchServices
             }
             return snippets;
         }
-
     }
 }

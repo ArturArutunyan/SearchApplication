@@ -8,7 +8,6 @@ namespace ServiceParser.SearchServices.Google
     {
         public Google()
         {
-            BaseUrl = @"https://www.google.com/search?q=";
         }
         public override async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken)
         {

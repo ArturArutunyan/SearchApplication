@@ -11,6 +11,11 @@ namespace ServiceParser.SearchService
     public interface ISearchService
     {
         /// <summary>
+        /// Обьект хранящий настройки сервиса
+        /// </summary>
+        ISearchServiceSettings Settings { get; set; }
+
+        /// <summary>
         /// Метод асинхронно возвращающий массив обьектов Snippet
         /// </summary>
         /// <param name="searchQuery">Строка запроса</param>

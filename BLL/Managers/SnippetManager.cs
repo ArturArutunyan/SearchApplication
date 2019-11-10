@@ -16,9 +16,15 @@ namespace BLL.Managers
         }
         public async Task<IEnumerable<ISnippet>> GetSnippetsFromParserAsync(string searchQuery, int count)
         {
-            var searchEngine = new Engine();
+            var searchEngine = new Engine(); // обьект поискового движка
 
-            var yandex = new Yandex();
+            #region Settings for services
+            YandexSettings settings = new YandexSettings();
+            #endregion
+
+            #region Services
+            var yandex = new Yandex(settings);
+            #endregion
 
             searchEngine.AddSearchService(yandex);
             var snippets = searchEngine.Start(searchQuery, count);
