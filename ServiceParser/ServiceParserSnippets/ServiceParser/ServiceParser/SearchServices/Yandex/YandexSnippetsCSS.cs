@@ -10,6 +10,6 @@ namespace ServiceParser.SearchServices.Yandex
 
         public const string YandexImagesClass = ".Link.OrganicTitle-Link";
 
-        public const string FactClass = ".fact__title.typo.typo_text_l.typo_line_m";
+        public const string FactContainer = ".fact__title.typo.typo_text_l.typo_line_m>a";
     }
 }

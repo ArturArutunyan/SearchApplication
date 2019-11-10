@@ -1,6 +1,8 @@
 ﻿using BLL.Interfaces;
 using ServiceParser.Interfaces.SearchServices;
 using ServiceParser.SearchEngine;
+using ServiceParser.SearchService;
+using ServiceParser.SearchServices.Google;
 using ServiceParser.SearchServices.Yandex;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,18 +21,24 @@ namespace BLL.Managers
             var searchEngine = new Engine(); // обьект поискового движка
 
             #region Settings for services
-            YandexSettings settings = new YandexSettings();
+            var yandexSettings = new YandexSettings();
+            var googleSettings = new GoogleSettings();
             #endregion
 
             #region Helpers
             var yandexHelper = new YandexServiceHelper();
+            var googleHelper = new GoogleServiceHelper();
             #endregion
 
             #region Services
-            var yandex = new Yandex(settings, yandexHelper);
+            var yandex = new Yandex(yandexSettings, yandexHelper);
+            var google = new Google(googleSettings, googleHelper);
             #endregion
 
-            searchEngine.AddSearchService(yandex);
+            var services = new List<ISearchService>() { google, yandex };
+
+            searchEngine.AddRangeSearchServices(services);
+
             var snippets = searchEngine.Start(searchQuery, count);
 
             if (snippets != null)

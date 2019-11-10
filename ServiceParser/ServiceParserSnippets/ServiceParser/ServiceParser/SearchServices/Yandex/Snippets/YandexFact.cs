@@ -9,7 +9,7 @@ namespace ServiceParser.SearchServices.Yandex.Snippets
     {
         public Snippet GetSnippet(IElement snippetContainer)
         {
-            var factContainer = snippetContainer.QuerySelector(YandexSnippetsCSS.FactClass + ">" + HTMLTags.A);
+            var factContainer = snippetContainer.QuerySelector(YandexSnippetsCSS.FactContainer);
 
             if (factContainer != null)
             {

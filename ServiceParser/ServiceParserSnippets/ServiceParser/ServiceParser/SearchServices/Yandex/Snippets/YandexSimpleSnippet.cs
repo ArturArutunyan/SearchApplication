@@ -1,7 +1,6 @@
 ﻿using AngleSharp.Dom;
 using ServiceParser.Entities;
 using ServiceParser.Interfaces;
-using System.Linq;
 
 namespace ServiceParser.SearchServices.Yandex.Snippets
 {
@@ -9,14 +8,14 @@ namespace ServiceParser.SearchServices.Yandex.Snippets
     {
         public Snippet GetSnippet(IElement snippetContainer)
         {
-            var simpleSnippet = snippetContainer.QuerySelectorAll(YandexSnippetsCSS.SimpleSnippetClass).LastOrDefault();
+            var simpleContainer = snippetContainer.QuerySelector(YandexSnippetsCSS.SimpleSnippetClass);
 
-            if (simpleSnippet != null)
+            if (simpleContainer != null)
             {
                 return new Snippet()
                 {
-                    Title = simpleSnippet.TextContent,
-                    Url = simpleSnippet.GetAttribute(CSSAttributes.Href)
+                    Title = simpleContainer.TextContent,
+                    Url = simpleContainer.GetAttribute(CSSAttributes.Href)
                 };
             }
             return null;

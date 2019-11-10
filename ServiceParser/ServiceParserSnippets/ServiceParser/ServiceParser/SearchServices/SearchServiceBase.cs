@@ -58,7 +58,7 @@ namespace ServiceParser.SearchServices
                 await page.GoToAsync($"{Settings.BaseUrl}{searchQuery}{Settings.Page}{pageId++}"); // собственно получение обьекта страницы
 
                 var html = await page.GetContentAsync();          
-                var document = parser.ParseDocument(html); // строим DOM модель
+                var document = await parser.ParseDocumentAsync(html); // строим DOM модель
 
                 var containers = document.QuerySelectorAll(Settings.MainContainerClass).Take(leftToTake);
 
