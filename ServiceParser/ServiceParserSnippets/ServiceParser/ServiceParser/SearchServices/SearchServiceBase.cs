@@ -25,22 +25,10 @@ namespace ServiceParser.SearchServices
 
         public virtual async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken)
         {
-            return await GetSnippetsAsync(
-                    searchQuery: searchQuery,
-                    count: count,
-                    helper: Helper,
-                    mainContainerClass: Settings.MainContainerClass,
-                    cancellationToken: cancellationToken
-                );
-        }
-
-        protected virtual async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, string mainContainerClass,
-            IServiceHelper helper, CancellationToken cancellationToken)
-        {
             if (searchQuery == null)
                 return null;
 
-            List<Snippet> snippets = new List<Snippet>(); // итоговый список сниппетов
+            var snippets = new List<Snippet>(); // итоговый список сниппетов
 
             // Для запроса страницы используется библиотека Puppeteer sharp
             // она позволяет обходить защиту поисковых систем от парсинга
@@ -69,31 +57,26 @@ namespace ServiceParser.SearchServices
 
                 await page.GoToAsync($"{Settings.BaseUrl}{searchQuery}{Settings.Page}{pageId++}"); // собственно получение обьекта страницы
 
-                var html = await page.GetContentAsync();
-                
+                var html = await page.GetContentAsync();          
                 var document = parser.ParseDocument(html); // строим DOM модель
 
-                var containers = document.QuerySelectorAll(mainContainerClass).Take(leftToTake);
+                var containers = document.QuerySelectorAll(Settings.MainContainerClass).Take(leftToTake);
 
-                snippets.AddRange(GetSnippets(containers, helper));
-
+                GetSnippetsFromContainers(containers, ref snippets);
             }
 
             return snippets.ToArray();
         }
 
-        protected virtual IEnumerable<Snippet> GetSnippets(IEnumerable<IElement> containers, IServiceHelper helper)
-        {
-            var snippets = new List<Snippet>();
-
+        protected virtual void GetSnippetsFromContainers(IEnumerable<IElement> containers, ref List<Snippet> snippets)
+        {         
             foreach(var container in containers)
             {
-                var snippet = helper.GetSnippet(container);
+                var snippet = Helper.GetSnippet(container);
                 
                 if (snippet != null)
                     snippets.Add(snippet);
             }
-            return snippets;
         }
     }
 }

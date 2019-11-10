@@ -1,10 +1,13 @@
 ﻿
+using System.Threading.Tasks;
+
 namespace ServiceParser
 {
     public class Program
     {
-        public static void Main()
-        {          
+        public async static Task Main()
+        {
+            //HttpClient
         }
     }
 }
