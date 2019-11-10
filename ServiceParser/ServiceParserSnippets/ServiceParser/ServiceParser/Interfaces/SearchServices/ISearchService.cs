@@ -1,4 +1,5 @@
 ﻿using ServiceParser.Entities;
+using ServiceParser.Interfaces;
 using ServiceParser.Interfaces.SearchServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,11 @@ namespace ServiceParser.SearchService
         /// Обьект хранящий настройки сервиса
         /// </summary>
         ISearchServiceSettings Settings { get; set; }
+
+        /// <summary>
+        /// Обьект хелпера помогающий определить тип сниппета
+        /// </summary>
+        IServiceHelper Helper { get; set; }
 
         /// <summary>
         /// Метод асинхронно возвращающий массив обьектов Snippet

@@ -15,8 +15,24 @@ namespace ServiceParser.SearchServices
     public abstract class SearchServiceBase : ISearchService
     { 
         public ISearchServiceSettings Settings { get; set; }
+        public IServiceHelper Helper { get; set; }
 
-        public abstract Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken);
+        public SearchServiceBase(ISearchServiceSettings settings, IServiceHelper helper)
+        {
+            Settings = settings;
+            Helper = helper;
+        }
+
+        public virtual async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken)
+        {
+            return await GetSnippetsAsync(
+                    searchQuery: searchQuery,
+                    count: count,
+                    helper: Helper,
+                    mainContainerClass: Settings.MainContainerClass,
+                    cancellationToken: cancellationToken
+                );
+        }
 
         protected virtual async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, string mainContainerClass,
             IServiceHelper helper, CancellationToken cancellationToken)

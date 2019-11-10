@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ServiceParser.SearchServices.Yandex
 {
-    class YandexServiceHelper : ServiceHelper 
+    public class YandexServiceHelper : ServiceHelper 
     {
         public YandexServiceHelper()
         {

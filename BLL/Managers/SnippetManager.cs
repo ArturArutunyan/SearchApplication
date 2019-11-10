@@ -22,8 +22,12 @@ namespace BLL.Managers
             YandexSettings settings = new YandexSettings();
             #endregion
 
+            #region Helpers
+            var yandexHelper = new YandexServiceHelper();
+            #endregion
+
             #region Services
-            var yandex = new Yandex(settings);
+            var yandex = new Yandex(settings, yandexHelper);
             #endregion
 
             searchEngine.AddSearchService(yandex);

@@ -1,23 +1,13 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using ServiceParser.Entities;
+﻿using ServiceParser.Interfaces;
+using ServiceParser.Interfaces.SearchServices;
 
 namespace ServiceParser.SearchServices.Google
 {
     public class Google : SearchServiceBase
     {
-        public Google()
+        public Google(ISearchServiceSettings settings, IServiceHelper helper) 
+            : base(settings, helper)
         {
-        }
-        public override async Task<Snippet[]> GetSnippetsAsync(string searchQuery, int count, CancellationToken cancellationToken)
-        {
-            return await GetSnippetsAsync(
-                    searchQuery: searchQuery,
-                    count: count,
-                    helper: new GoogleServiceHelper(),
-                    mainContainerClass: GoogleSnippetsCSS.MainContainerClass,
-                    cancellationToken: cancellationToken
-                );
         }
     }
 }
