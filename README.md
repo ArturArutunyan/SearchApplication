@@ -5,3 +5,6 @@ Snippets parser from search services
 1. Download
 2. Add migration in DAL: Add-Migration 001 -OutputDir Migrations
 3. Run SearchApp
+
+# Contact
+aav180913@gmail.com
