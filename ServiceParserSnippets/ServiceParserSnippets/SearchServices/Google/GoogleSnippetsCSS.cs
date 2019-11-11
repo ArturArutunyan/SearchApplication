@@ -3,10 +3,14 @@ namespace ServiceParserSnippets.SearchServices.Google
 {
     public static class GoogleSnippetsCSS
     {
-        public const string GoogleSimpleContainerClass = ".g";
+        public const string SimpleMainContainer = ".g";
 
-        public const string TitleClass = ".LC20lb";
+        public const string ImagesMainContainer = ".e2BEnf.U7izfe";
 
-        public const string ContainerHref = ".r>a";
+        public const string ImagesContainer = ".iu-card-header";
+
+        public const string SimpleTitleClass = ".LC20lb";
+
+        public const string SimpleContainerHref = ".r>a";
     }
 }

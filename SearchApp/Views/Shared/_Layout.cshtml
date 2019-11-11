@@ -12,11 +12,18 @@
         <div class="container" style="margin: 40px auto;">
             <form method="post" asp-action="GetDataFromParser" asp-controller="Home">
                 <div class="form-group">
-                    <label>Введите строку поиска</label>
+                    <label>Введите строку для поиска</label>
                     <input type="text" name="searchQuery" class="form-control">
                 </div>
-                <input type="submit" value="Отправить" class="btn btn-primary">
-                <input type="submit" value="Получить из БД" class="btn btn-info" asp-action="GetDataFromDb" asp-controller="Home">
+                <div class="d-flex justify-content-center">
+                    <div class="p-2">
+                        <input type="submit" value="Отправить" class="btn btn-primary">
+                    </div>
+                    <div class="p-2">
+                        <input type="submit" value="Получить из БД" class="btn btn-info" asp-action="GetDataFromDb" asp-controller="Home">
+                    </div>                                    
+                </div>
+                
             </form>
         </div>
     </header>

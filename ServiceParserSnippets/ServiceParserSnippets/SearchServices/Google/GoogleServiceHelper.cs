@@ -10,7 +10,8 @@ namespace ServiceParserSnippets.SearchServices.Google
         {
             _snippets.AddRange(new List<ISnippetContainer>
             {
-                new GoogleSimpleSnippet()
+                new GoogleSimpleSnippet(),
+                new GoogleImages()
             });
         }
     }

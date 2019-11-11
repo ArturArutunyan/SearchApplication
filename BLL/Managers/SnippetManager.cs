@@ -2,6 +2,7 @@
 using ServiceParserSnippets.Entities;
 using ServiceParserSnippets.Interfaces.SearchServices;
 using ServiceParserSnippets.SearchEngine;
+using ServiceParserSnippets.SearchServices.Bing;
 using ServiceParserSnippets.SearchServices.Google;
 using ServiceParserSnippets.SearchServices.Yandex;
 using System.Collections.Generic;
@@ -23,16 +24,19 @@ namespace BLL.Managers
             #region Settings for services
             var yandexSettings = new YandexSettings();
             var googleSettings = new GoogleSettings();
+            var bingSettings = new BingSettings();
             #endregion
 
             #region Helpers
             var yandexHelper = new YandexServiceHelper();
             var googleHelper = new GoogleServiceHelper();
+            var bingHelper = new BingServiceHelper();
             #endregion
 
             #region Services
             var yandex = new Yandex(yandexSettings, yandexHelper);
             var google = new Google(googleSettings, googleHelper);
+            var bing = new Bing(bingSettings, bingHelper);
             #endregion
 
             var services = new List<ISearchService>() { google, yandex };

@@ -6,8 +6,6 @@ namespace ServiceParserSnippets.SearchServices.Yandex
     {
         public string BaseUrl { get; } = @"https://yandex.ru/search/?text=";
 
-        public string Page { get; } = "&p=";
-
-        public string MainContainerClass { get; } = ".serp-item";
+        public string Page { get; } = "&p=";    
     }
 }

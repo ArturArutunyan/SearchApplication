@@ -4,20 +4,18 @@ using ServiceParserSnippets.Interfaces.SearchServices;
 
 namespace ServiceParserSnippets.SearchServices.Google.Snippets
 {
-    public class GoogleSimpleSnippet : ISnippetContainer
+    public class GoogleImages : ISnippetContainer
     {
         public Snippet GetSnippet(IElement snippetContainer)
         {
-            var title = snippetContainer.QuerySelector(GoogleSnippetsCSS.SimpleTitleClass);
+            var imgContainer = snippetContainer.QuerySelector(GoogleSnippetsCSS.ImagesContainer);
 
-            if (title != null)
+            if (imgContainer != null)
             {
-                var url = snippetContainer.QuerySelector(GoogleSnippetsCSS.SimpleContainerHref).GetAttribute(CSSAttributes.Href);
-
                 return new Snippet()
                 {
-                    Title = title.TextContent,
-                    Url = url
+                    Title = imgContainer.TextContent,
+                    Url = imgContainer.GetAttribute(CSSAttributes.Href)
                 };
             }
 

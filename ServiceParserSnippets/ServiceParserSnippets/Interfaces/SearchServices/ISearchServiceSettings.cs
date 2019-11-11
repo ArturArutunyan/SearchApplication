@@ -5,6 +5,5 @@ namespace ServiceParserSnippets.Interfaces.SearchServices
     {
         string BaseUrl { get; }
         string Page { get; }
-        string MainContainerClass { get; }
     }
 }
