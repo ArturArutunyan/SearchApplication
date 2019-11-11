@@ -4,7 +4,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using ServiceParser.Entities;
+using ServiceParserSnippets.Entities;
 using System.IO;
 
 namespace DAL.DAO.EF

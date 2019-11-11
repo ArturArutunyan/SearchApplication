@@ -1,9 +1,9 @@
 ﻿using BLL.Interfaces;
-using ServiceParser.Interfaces.SearchServices;
-using ServiceParser.SearchEngine;
-using ServiceParser.SearchService;
-using ServiceParser.SearchServices.Google;
-using ServiceParser.SearchServices.Yandex;
+using ServiceParserSnippets.Entities;
+using ServiceParserSnippets.Interfaces.SearchServices;
+using ServiceParserSnippets.SearchEngine;
+using ServiceParserSnippets.SearchServices.Google;
+using ServiceParserSnippets.SearchServices.Yandex;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,7 +16,7 @@ namespace BLL.Managers
         {
             _snippetRepository = snippetRepository;
         }
-        public async Task<IEnumerable<ISnippet>> GetSnippetsFromParserAsync(string searchQuery, int count)
+        public async Task<IEnumerable<Snippet>> GetSnippetsFromParserAsync(string searchQuery, int count)
         {
             var searchEngine = new Engine(); // обьект поискового движка
 
@@ -47,7 +47,7 @@ namespace BLL.Managers
             return snippets;
         }
 
-        public async Task<IEnumerable<ISnippet>> GetSnippetsFromDbAsync(int count)
+        public async Task<IEnumerable<Snippet>> GetSnippetsFromDbAsync(int count)
         {
             return await _snippetRepository.GetSnippets(count);
         }

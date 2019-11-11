@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\ServiceParser\ServiceParserSnippets\ServiceParser\ServiceParser\ServiceParser.csproj" />
+    <ProjectReference Include="..\ServiceParserSnippets\ServiceParserSnippets\ServiceParserSnippets.csproj" />
   </ItemGroup>
 
 </Project>

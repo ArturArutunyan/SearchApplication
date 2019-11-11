@@ -1,7 +1,6 @@
 ﻿using BLL.Interfaces;
 using DAL.DAO.EF;
-using ServiceParser.Entities;
-using ServiceParser.Interfaces.SearchServices;
+using ServiceParserSnippets.Entities;
 
 namespace BLL.Repositories
 {

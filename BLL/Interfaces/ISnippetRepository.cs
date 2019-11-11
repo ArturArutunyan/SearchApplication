@@ -1,5 +1,4 @@
-﻿using ServiceParser.Entities;
-
+﻿using ServiceParserSnippets.Entities;
 
 namespace BLL.Interfaces
 {
