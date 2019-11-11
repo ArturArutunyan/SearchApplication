@@ -15,7 +15,6 @@ namespace ServiceParserSnippets.SearchServices
     { 
         public ISearchServiceSettings Settings { get; set; }
         public IServiceHelper Helper { get; set; }
-      
         protected Browser browser; // обьект браузера
         public bool BrowserIsLaunched { get; protected set; } = false;
 
@@ -61,6 +60,8 @@ namespace ServiceParserSnippets.SearchServices
                 GetSnippetsFromContainers(containers, ref snippets);
             }
 
+            await CloseBrowserAsync();
+
             return snippets.ToArray();
         }
 
@@ -94,10 +95,16 @@ namespace ServiceParserSnippets.SearchServices
 
             browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = true
+                Headless = false
             });
 
             BrowserIsLaunched = true; // меняем состояние браузера
+        }
+
+        public virtual async Task CloseBrowserAsync()
+        {
+            if (!browser.IsClosed)
+                await browser.CloseAsync();
         }
     }
 }

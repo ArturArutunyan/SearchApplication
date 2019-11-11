@@ -1,5 +1,4 @@
-﻿
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace ServiceParserSnippets.Interfaces.SearchServices
 {
@@ -16,7 +15,11 @@ namespace ServiceParserSnippets.Interfaces.SearchServices
         /// <summary>
         /// Метод запуска браузера
         /// </summary>
-        /// <returns></returns>
         Task LaunchBrowserAsync();
+
+        /// <summary>
+        /// Метод закрытия браузера
+        /// </summary>
+        Task CloseBrowserAsync();
     }
 }
