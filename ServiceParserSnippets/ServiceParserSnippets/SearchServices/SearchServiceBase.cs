@@ -94,7 +94,7 @@ namespace ServiceParserSnippets.SearchServices
 
             browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = false
+                Headless = true
             });
 
             BrowserIsLaunched = true; // меняем состояние браузера

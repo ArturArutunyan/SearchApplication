@@ -16,7 +16,7 @@ namespace SearchApp.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetDataFromParser([FromForm]string searchQuery, int count = 10)
+        public async Task<IActionResult> GetDataFromParser([FromForm]string searchQuery, int count = 20)
         {
             var snippets = await _snippetManager.GetSnippetsFromParserAsync(searchQuery, count);
             return View("Index", snippets);

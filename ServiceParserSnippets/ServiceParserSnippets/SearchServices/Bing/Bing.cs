@@ -24,7 +24,7 @@ namespace ServiceParserSnippets.SearchServices.Bing
             if (first != 0)
                 first = (pageId + 1 * 10);
 
-            return $"{Settings.BaseUrl}{searchQuery}{Settings.Page}{first}";
+            return $"{Settings.BaseUrl}{searchQuery}{Settings.Page}{first}&FORM = PERE{pageId}";
         }
         protected override IEnumerable<IElement> GetSnippetsContainers(IHtmlDocument document)
         {

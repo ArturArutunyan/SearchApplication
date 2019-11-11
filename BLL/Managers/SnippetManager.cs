@@ -39,7 +39,7 @@ namespace BLL.Managers
             var bing = new Bing(bingSettings, bingHelper);
             #endregion
 
-            var services = new List<ISearchService>() { google, yandex };
+            var services = new List<ISearchService>() { google, yandex, bing };
 
             searchEngine.AddRangeSearchServices(services);
 
